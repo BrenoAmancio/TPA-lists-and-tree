@@ -69,18 +69,21 @@ public class ListaOrdenada<T extends Comparable<T>> {
         ListNode<T> currNode = this.first;
 
         while (currNode != null) {
+
             T currValue = currNode.getValue();
             if (currValue.compareTo(value) == 0) {
+
                 return currValue;  // Retorna o valor encontrado
 
-            } else if (currValue.compareTo(value) < 0) {
-                System.out.println("acabou antes");
+            } else if (currValue.compareTo(value) > 0) {
+
                 return null;
             }
 
             currNode = currNode.getNext();  // Avança para o próximo nó
         }
 
+        System.out.println("Erro, Nenhum Aluno Com Essa Matricula");
         return null;  // Não encontrou o valor
     }
 

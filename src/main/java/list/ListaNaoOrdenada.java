@@ -27,10 +27,12 @@ public class ListaNaoOrdenada<T extends Comparable<T>> {
     }
 
     public T pesquisar(T value) {
+
         ListNode<T> currNode = this.first;
 
         while (currNode != null) {
             T currValue = currNode.getValue();
+
             if (currValue.compareTo(value) == 0) {
                 return currValue;  // Retorna o valor encontrado
 

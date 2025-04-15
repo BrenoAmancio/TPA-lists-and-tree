@@ -1,4 +1,4 @@
-public class Aluno implements Comparable<Aluno> {
+public class Aluno {
     private int matricula;
     private float nota;
     private String nome;
@@ -12,11 +12,6 @@ public class Aluno implements Comparable<Aluno> {
     @Override
     public String toString() {
         return matricula + " - " + nome + " - " + nota;
-    }
-
-    @Override
-    public int compareTo(Aluno a) {
-        return Integer.compare(this.matricula, a.matricula);
     }
 
     @Override

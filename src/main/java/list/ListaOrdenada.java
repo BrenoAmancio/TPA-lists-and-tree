@@ -2,7 +2,7 @@ package list;
 
 import java.util.Comparator;
 
-public class ListaOrdenada<T extends Comparable<T>> {
+public class ListaOrdenada<T> {
     private ListNode<T> first, last;
     private int length;
     private final boolean order;
@@ -15,7 +15,7 @@ public class ListaOrdenada<T extends Comparable<T>> {
         this.comparador = comparador;
     }
 
-    private void adicionar(T value) {
+    public void adicionar(T value) {
         ListNode<T> newNode = new ListNode<>(value);
         ListNode<T> currNode, prevNode;
 
@@ -48,35 +48,16 @@ public class ListaOrdenada<T extends Comparable<T>> {
         this.length++;
     }
 
-    public void add(T value) {
-        adicionar(value);
-    }
-
-    public boolean has(T value) {
-        ListNode<T> auxNode = this.first;
-        while (auxNode != null) {
-            if (auxNode.getValue().equals(value)) {
-                return true;
-            }
-
-            auxNode = auxNode.getNext();
-        }
-
-        return false;
-    }
-
     public T pesquisar(T value) {
         ListNode<T> currNode = this.first;
 
         while (currNode != null) {
-
             T currValue = currNode.getValue();
-            if (currValue.compareTo(value) == 0) {
 
-                return currValue;  // Retorna o valor encontrado
+            if (this.comparador.compare(currValue, value) == 0) {
+                return currNode.getValue();  // Retorna o valor encontrado
 
-            } else if (currValue.compareTo(value) > 0) {
-
+            } else if (comparador.compare(currValue, value) > 0) {
                 return null;
             }
 
@@ -87,70 +68,70 @@ public class ListaOrdenada<T extends Comparable<T>> {
         return null;  // Não encontrou o valor
     }
 
-    public boolean remover(int idx) {
-        if (idx < 0 || idx > this.length) {
-            return false;
-        }
+    // public boolean remover(int idx) {
+    //     if (idx < 0 || idx > this.length) {
+    //         return false;
+    //     }
 
-        ListNode<T> auxNode = this.first;
-        ListNode<T> prevNode = null;
-        for (int i = 0; i < idx; i++) {
-            prevNode = auxNode;
-            auxNode = auxNode.getNext();
-        }
+    //     ListNode<T> auxNode = this.first;
+    //     ListNode<T> prevNode = null;
+    //     for (int i = 0; i < idx; i++) {
+    //         prevNode = auxNode;
+    //         auxNode = auxNode.getNext();
+    //     }
 
-        if (auxNode == this.first) {
-            this.first = this.first.getNext();
+    //     if (auxNode == this.first) {
+    //         this.first = this.first.getNext();
 
-            if (auxNode == this.last) {
-                this.last = null;
-            }
+    //         if (auxNode == this.last) {
+    //             this.last = null;
+    //         }
 
-        } else {
-            prevNode.setNext(auxNode.getNext());
+    //     } else {
+    //         prevNode.setNext(auxNode.getNext());
 
-            if (auxNode == this.last) {
-                this.last = prevNode;
-            }
-        }
+    //         if (auxNode == this.last) {
+    //             this.last = prevNode;
+    //         }
+    //     }
 
-        this.length--;
-        return true;
-    }
+    //     this.length--;
+    //     return true;
+    // }
 
-    public boolean remover(T value) {
-        ListNode<T> auxNode = this.first;
-        ListNode<T> prevNode = null;
+    // public boolean remover(T value) {
+    //     ListNode<T> auxNode = this.first;
+    //     ListNode<T> prevNode = null;
 
-        while (auxNode != null) {
+    //     while (auxNode != null) {
 
-            if (auxNode.getValue().equals(value)) {
+    //         if (auxNode.getValue().equals(value)) {
 
-                if (auxNode == this.first) {
-                    this.first = this.first.getNext();
+    //             if (auxNode == this.first) {
+    //                 this.first = this.first.getNext();
 
-                    if (auxNode == this.last) {
-                        this.last = null;
-                    }
+    //                 if (auxNode == this.last) {
+    //                     this.last = null;
+    //                 }
 
-                } else {
-                    prevNode.setNext(auxNode.getNext());
+    //             } else {
+    //                 prevNode.setNext(auxNode.getNext());
 
-                    if (auxNode == this.last) {
-                        this.last = prevNode;
-                    }
-                }
+    //                 if (auxNode == this.last) {
+    //                     this.last = prevNode;
+    //                 }
+    //             }
 
-                this.length--;
-                return true;
-            }
+    //             this.length--;
+    //             return true;
+    //         }
 
-            prevNode = auxNode;
-            auxNode = auxNode.getNext();
-        }
+    //         prevNode = auxNode;
+    //         auxNode = auxNode.getNext();
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 
     @Override
     public String toString() {

@@ -15,6 +15,7 @@ public class ListaOrdenada<T> {
         this.comparador = comparador;
     }
 
+    // Funcao que adiciona um aluno na lista ordenada
     public void adicionar(T value) {
         ListNode<T> newNode = new ListNode<>(value);
         ListNode<T> currNode, prevNode;
@@ -48,6 +49,7 @@ public class ListaOrdenada<T> {
         this.length++;
     }
 
+    // Funcao que pesquisa se uma matricula esta na lista ordenada
     public T pesquisar(T value) {
         ListNode<T> currNode = this.first;
 
@@ -64,74 +66,8 @@ public class ListaOrdenada<T> {
             currNode = currNode.getNext();  // Avança para o próximo nó
         }
 
-        //System.out.println("Erro, Nenhum Aluno Com Essa Matricula");
         return null;  // Não encontrou o valor
     }
-
-    // public boolean remover(int idx) {
-    //     if (idx < 0 || idx > this.length) {
-    //         return false;
-    //     }
-
-    //     ListNode<T> auxNode = this.first;
-    //     ListNode<T> prevNode = null;
-    //     for (int i = 0; i < idx; i++) {
-    //         prevNode = auxNode;
-    //         auxNode = auxNode.getNext();
-    //     }
-
-    //     if (auxNode == this.first) {
-    //         this.first = this.first.getNext();
-
-    //         if (auxNode == this.last) {
-    //             this.last = null;
-    //         }
-
-    //     } else {
-    //         prevNode.setNext(auxNode.getNext());
-
-    //         if (auxNode == this.last) {
-    //             this.last = prevNode;
-    //         }
-    //     }
-
-    //     this.length--;
-    //     return true;
-    // }
-
-    // public boolean remover(T value) {
-    //     ListNode<T> auxNode = this.first;
-    //     ListNode<T> prevNode = null;
-
-    //     while (auxNode != null) {
-
-    //         if (auxNode.getValue().equals(value)) {
-
-    //             if (auxNode == this.first) {
-    //                 this.first = this.first.getNext();
-
-    //                 if (auxNode == this.last) {
-    //                     this.last = null;
-    //                 }
-
-    //             } else {
-    //                 prevNode.setNext(auxNode.getNext());
-
-    //                 if (auxNode == this.last) {
-    //                     this.last = prevNode;
-    //                 }
-    //             }
-
-    //             this.length--;
-    //             return true;
-    //         }
-
-    //         prevNode = auxNode;
-    //         auxNode = auxNode.getNext();
-    //     }
-
-    //     return false;
-    // }
 
     @Override
     public String toString() {
@@ -149,7 +85,4 @@ public class ListaOrdenada<T> {
         return s.toString();
     }
 
-    public int getLength() {
-        return this.length;
-    }
 }

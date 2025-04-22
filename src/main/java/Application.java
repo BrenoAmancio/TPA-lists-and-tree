@@ -8,22 +8,26 @@ import java.util.Scanner;
 
 public class Application {
 
-    private static final String NOME_ARQUIVO1 = "src/main/alunosBalanceados.txt";
-    private static final String NOME_ARQUIVO2 = "src/main/alunosOrdenados.txt";
+    private static final String NOME_ARQUIVO = "src/main/alunosOrdenados.txt";
     public static void main(String[] args) {
 
         Boolean continuar = true;
         Scanner s = new Scanner(System.in);
 
+        //Cria as listas
         ListaOrdenada<Aluno> lista_ord = new ListaOrdenada<Aluno>(true, new ComparadorAlunoPorMatricula());
         ListaNaoOrdenada<Aluno> lista_n_ord = new ListaNaoOrdenada<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO1))) {
+
+        //Faz o try-catch para a leitura do txt, se funcionando adiciona as informações em aluno e depois na lista não ordenada
+        try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO))) {
 
             int numRegistros = Integer.parseInt(reader.readLine().trim());
             System.out.println("Número de registros: " + numRegistros);
 
             String linha;
+
+            // iniciando o tempo de processamento
             long inicio = System.nanoTime();
 
             while ((linha = reader.readLine()) != null) {
@@ -36,7 +40,9 @@ public class Application {
                 lista_n_ord.adicionar(a1);
             }
 
+            // Fechando o tempo de processamento
             long fim = System.nanoTime();
+
             System.out.println("Tempo de execução para adicionar na lista nao ordenada: " + (fim - inicio) + " ns");
 
         } catch (IOException e) {
@@ -45,13 +51,15 @@ public class Application {
             System.err.println("Erro ao processar um dos valores numéricos: " + e.getMessage());
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO2))) {
+        //Faz o try-catch para a leitura do txt, se funcionando adiciona as informações em aluno e depois na lista ordenada
+        try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO))) {
 
             int numRegistros = Integer.parseInt(reader.readLine().trim());
             //System.out.println("Número de registros: " + numRegistros);
 
             String linha;
 
+            // iniciando o tempo de processamento
             long inicio = System.nanoTime();
 
             while ((linha = reader.readLine()) != null) {
@@ -65,6 +73,7 @@ public class Application {
 
             }
 
+            // Fechando o tempo de processamento
             long fim = System.nanoTime();
 
             System.out.println("Tempo de execução para adicionar na lista ordenada: " + (fim - inicio) + " ns");
@@ -76,18 +85,7 @@ public class Application {
             System.err.println("Erro ao processar um dos valores numéricos: " + e.getMessage());
         }
 
-        //Aluno a1 = new Aluno(1, "Zé", 50);
-        //Aluno a2 = new Aluno(3, "Mané", 50);
-        //Aluno a3 = new Aluno(5, "Mano", 50);
-
-        //lista_ord.adicionar(a3);
-        //lista_ord.adicionar(a2);
-        //lista_ord.adicionar(a1);
-
-        //lista_n_ord.adicionar(a1);
-        //lista_n_ord.adicionar(a3);
-        //lista_n_ord.adicionar(a2);
-
+        // Exibe o menu enquanto a opção 0 não for escolhida
         while (continuar.equals(true)) {
 
             System.out.println("Escolha uma opção:");
@@ -97,34 +95,40 @@ public class Application {
 
             String opcao = s.nextLine();
 
+            // Sai do menu se escolhida
             if (opcao.equals("0")){
 
                 continuar = false;
             }
 
+            // Faz a busca na lista não ordenada
             if (opcao.equals("1")){
 
                 System.out.println("Digite uma matricula a ser pesquisa na lista não ordenada:");
                 int mat = s.nextInt();
                 s.nextLine();
 
+                // Calculando o tempo de processamento
                 long inicio = System.nanoTime();
                 Aluno resultado = lista_n_ord.pesquisar(new Aluno(mat, "", 0));
                 long fim = System.nanoTime();
 
                 System.out.println("Tempo de execução: " + (fim - inicio) + " ns");
 
+                // Checa se matricula não esta na lista
                 if (resultado == null){
 
                     System.out.println("Erro, nenhum aluno com essa matricula");
                 }
 
+                // Printa informações do aluno da matricula encontrada
                 else {
 
                     System.out.println("Aluno Encontrado: " + resultado);
                 }
             }
 
+            // Faz a busca na lista ordenada
             if (opcao.equals("2")){
 
                 System.out.println("Digite uma matricula a ser pesquisa na lista ordenada:");
@@ -137,23 +141,21 @@ public class Application {
 
                 System.out.println("Tempo de execução: " + (fim - inicio) + " ns");
 
+
+                // Checa se matricula não esta na lista
                 if (resultado == null){
 
                     System.out.println("Erro, nenhum aluno com essa matricula");
                 }
 
+
+                // Printa informações do aluno da matricula encontrada
                 else {
 
                     System.out.println("Aluno Encontrado: " + resultado);
                 }
             }
         }
-
-        //System.out.println(lista_ord.pesquisar(new Aluno(4, "", 0)));
-        //System.out.println(lista_n_ord.pesquisar(new Aluno(4, "", 0)));
-
-        //System.out.println(lista_ord);
-        //System.out.println(lista_n_ord);
 
         s.close();
     }

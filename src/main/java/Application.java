@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Application {
 
-    private static final String NOME_ARQUIVO = "src/main/alunosOrdenados.txt";
+    private static final String NOME_ARQUIVO = "alunosOrdenados.txt";
     public static void main(String[] args) {
 
         Boolean continuar = true;

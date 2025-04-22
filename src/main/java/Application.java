@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 public class Application {
 
-    private static final String NOME_ARQUIVO1 = "alunosBalanceados.txt";
-    private static final String NOME_ARQUIVO2 = "alunosOrdenados.txt";
+    private static final String NOME_ARQUIVO1 = "src/main/alunosBalanceados.txt";
+    private static final String NOME_ARQUIVO2 = "src/main/alunosOrdenados.txt";
     public static void main(String[] args) {
 
         Boolean continuar = true;
@@ -21,7 +21,7 @@ public class Application {
         try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO1))) {
 
             int numRegistros = Integer.parseInt(reader.readLine().trim());
-            //System.out.println("Número de registros: " + numRegistros);
+            System.out.println("Número de registros: " + numRegistros);
 
             String linha;
             long inicio = System.nanoTime();

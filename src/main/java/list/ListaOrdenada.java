@@ -64,7 +64,7 @@ public class ListaOrdenada<T> {
             currNode = currNode.getNext();  // Avança para o próximo nó
         }
 
-        System.out.println("Erro, Nenhum Aluno Com Essa Matricula");
+        //System.out.println("Erro, Nenhum Aluno Com Essa Matricula");
         return null;  // Não encontrou o valor
     }
 

@@ -132,26 +132,6 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         return buscarCompletoPorNomeOuMatricula(no.getFilhoDireita(), valor, comparador2);
     }
 
-
-    private T buscarCompleto(NoArvore<T> no, T valor, Comparator comparador2) {
-        if (no == null){
-            return null;
-        }
-
-        if (comparador2.compare(valor, no.getValor()) == 0) {
-            return no.getValor();
-        }
-
-        // Busca na esquerda
-        T resultado = buscarCompleto(no.getFilhoEsquerda(), valor, comparador2);
-        if (resultado != null){
-            return resultado;
-        }
-
-        // Busca na direita
-        return buscarCompleto(no.getFilhoDireita(), valor, comparador2);
-    }
-
     @Override
     public T remover(T valor) {
         Remocao<T> resultado = removerRec(raiz, valor);
@@ -177,7 +157,6 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             return new Remocao<>(no, res.valorRemovido);
 
         } else {
-            // Nó com o valor encontrado
 
             //sem filhos
             if (no.getFilhoEsquerda() == null && no.getFilhoDireita() == null) {

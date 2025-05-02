@@ -4,53 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="722df8a3-41fc-469b-9f4b-8e8a8ab58871" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/java/appEtapa2/GeradorArquivosOrdenados.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/appEtapa2/Application.java" afterDir="false" />
-    </list>
+    <list default="true" id="a9370568-2b46-44c1-a012-af157810eb2b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
+  &quot;associatedIndex&quot;: 7
 }</component>
-  <component name="ProjectId" id="2vsoktESbvSCqWt7UACrjVdphp8" />
+  <component name="ProjectId" id="2vXtx00dprEiwnET08sLHkDfGLP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Application.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "tree",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Usuários/jonathan.silva/Documents/GitHub/TPA-lists-and-tree/src"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Usuários\jonathan.silva\Documents\GitHub\TPA-lists-and-tree\src\main\java\appEtapa2" />
-    </key>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="722df8a3-41fc-469b-9f4b-8e8a8ab58871" name="Changes" comment="" />
-      <created>1744943288867</created>
+      <changelist id="a9370568-2b46-44c1-a012-af157810eb2b" name="Changes" comment="" />
+      <created>1744303489365</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1744943288867</updated>
+      <updated>1744303489365</updated>
     </task>
     <servers />
   </component>

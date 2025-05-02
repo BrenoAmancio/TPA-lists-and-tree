@@ -60,11 +60,11 @@ public class AppRelatorioArvoreBinaria {
 //------Fim do trecho citado nas questões 5, 6 e 7 do relatório-------------------------------
 
 //------Início do trecho citado na questão 9 do relatório-------------------------------
-        arv = new ArvoreBinaria(compPorMatricula);
+        arv = new ArvoreBinaria(compPorNome);
         gerador.geraArvorePerfeitamenteBalanceada(1,100,arv);
         System.out.println("Árvore Perfeitamente Balanceada Criada");
         //Vou fazer uma busca pela chave de busca da árvore, ou seja, matrícula
-        Aluno busca = arv.pesquisar(new Aluno(2000000101,""));
+        Aluno busca = arv.pesquisar(new Aluno(2000000001,""));
         if (busca == null)
             System.out.println("Aluno não encontrado");
         else

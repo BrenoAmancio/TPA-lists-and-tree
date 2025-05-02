@@ -65,26 +65,159 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         while (noAtual != null) {
             comp = comparador.compare(valor, noAtual.getValor());
 
-            if (comp > 0) {
+            if (comp == 0) {
+                return noAtual.getValor(); // Valor encontrado
+            } else if (comp < 0) {
                 noAtual = noAtual.getFilhoEsquerda();
 
-            } else if (comp < 0) {
+            } else if (comp > 0) {
                 noAtual = noAtual.getFilhoDireita();
             }
         }
 
-        return noAtual.getValor();
+        return null;
 
     }
 
-    @Override
-    public T pesquisar(T valor, Comparator comparador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    public T pesquisar(T valor, Comparator comparador2) {
+
+        NoArvore<T> noAtual = this.raiz;
+
+        if (comparador.equals(comparador2)) {
+
+            System.out.println("comps iguais");
+
+            while (noAtual != null) {
+                int comp = comparador2.compare(valor, noAtual.getValor());
+
+                if (comp == 0) {
+                    return noAtual.getValor();
+
+                } else if (comp < 0) {
+                    noAtual = noAtual.getFilhoEsquerda();
+
+                } else {
+                    noAtual = noAtual.getFilhoDireita();
+
+                }
+            }
+
+            return null;
+
+        } else {
+
+            System.out.println("comps diferentes");
+
+            return buscarCompletoPorNomeOuMatricula(this.raiz, valor, comparador2);
+        }
+    }
+
+    public T buscarCompletoPorNomeOuMatricula(NoArvore<T> no, T valor, Comparator comparador2) {
+
+        if (no == null) {
+            return null;
+        }
+
+        if (comparador2.compare(valor, no.getValor()) == 0) {
+            return no.getValor();
+        }
+
+        // Busca na esquerda
+        T resultado = buscarCompletoPorNomeOuMatricula(no.getFilhoEsquerda(), valor, comparador2);
+        if (resultado != null){
+            return resultado;
+        }
+
+        return buscarCompletoPorNomeOuMatricula(no.getFilhoDireita(), valor, comparador2);
+    }
+
+
+    private T buscarCompleto(NoArvore<T> no, T valor, Comparator comparador2) {
+        if (no == null){
+            return null;
+        }
+
+        if (comparador2.compare(valor, no.getValor()) == 0) {
+            return no.getValor();
+        }
+
+        // Busca na esquerda
+        T resultado = buscarCompleto(no.getFilhoEsquerda(), valor, comparador2);
+        if (resultado != null){
+            return resultado;
+        }
+
+        // Busca na direita
+        return buscarCompleto(no.getFilhoDireita(), valor, comparador2);
     }
 
     @Override
     public T remover(T valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Remocao<T> resultado = removerRec(raiz, valor);
+        raiz = resultado.novoNo;
+        return resultado.valorRemovido;
+    }
+
+    private Remocao<T> removerRec(NoArvore<T> no, T valor) {
+        if (no == null) {
+            return new Remocao<>(null, null); // Valor não encontrado
+        }
+
+        int comp = comparador.compare(valor, no.getValor());
+
+        if (comp < 0) {
+            Remocao<T> res = removerRec(no.getFilhoEsquerda(), valor);
+            no.setFilhoEsquerda(res.novoNo);
+            return new Remocao<>(no, res.valorRemovido);
+
+        } else if (comp > 0) {
+            Remocao<T> res = removerRec(no.getFilhoDireita(), valor);
+            no.setFilhoDireita(res.novoNo);
+            return new Remocao<>(no, res.valorRemovido);
+
+        } else {
+            // Nó com o valor encontrado
+
+            //sem filhos
+            if (no.getFilhoEsquerda() == null && no.getFilhoDireita() == null) {
+                return new Remocao<>(null, no.getValor());
+            }
+
+            //um filho
+            if (no.getFilhoEsquerda() == null) {
+                return new Remocao<>(no.getFilhoDireita(), no.getValor());
+            }
+
+            if (no.getFilhoDireita() == null) {
+                return new Remocao<>(no.getFilhoEsquerda(), no.getValor());
+            }
+
+            //dois filhos
+            NoArvore<T> sucessor = encontrarMinimo(no.getFilhoDireita());
+            T valorSucessor = sucessor.getValor();
+            Remocao<T> res = removerRec(no.getFilhoDireita(), valorSucessor);
+            no.setValor(valorSucessor);
+            no.setFilhoDireita(res.novoNo);
+            return new Remocao<>(no, valor);
+        }
+    }
+
+    private NoArvore<T> encontrarMinimo(NoArvore<T> no) {
+        while (no.getFilhoEsquerda() != null) {
+            no = no.getFilhoEsquerda();
+        }
+        return no;
+    }
+
+    private static class Remocao<T> {
+        NoArvore<T> novoNo;
+        T valorRemovido;
+
+        Remocao(NoArvore<T> novoNo, T valorRemovido) {
+            this.novoNo = novoNo;
+            this.valorRemovido = valorRemovido;
+        }
     }
 
     @Override
@@ -121,7 +254,23 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public String caminharEmOrdem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
+        StringBuilder sb = new StringBuilder();
+        caminharEmOrdem(this.raiz, sb);
+
+        int len = sb.length();
+        if (len >= 4) {
+            sb.setLength(len - 4);
+        }
+
+        return sb.toString();
+    }
+
+    private void caminharEmOrdem(NoArvore<T> no, StringBuilder sb) {
+        if (no != null) {
+            caminharEmOrdem(no.getFilhoEsquerda(), sb);
+            sb.append(no.getValor()).append(" -> ");
+            caminharEmOrdem(no.getFilhoDireita(), sb);
+        }
     }
 
 }

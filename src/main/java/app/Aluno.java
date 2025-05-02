@@ -34,5 +34,10 @@ public class Aluno  {
         this.nome = nome;
     }
 
+    public String toString() {
+        return "matricula = " + matricula + ", nome = " + nome;
+    }
+
+
 
 }

@@ -86,7 +86,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
         if (comparador.equals(comparador2)) {
 
-            System.out.println("comps iguais");
+            //System.out.println("comps iguais");
 
             while (noAtual != null) {
                 int comp = comparador2.compare(valor, noAtual.getValor());
@@ -107,7 +107,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
         } else {
 
-            System.out.println("comps diferentes");
+            //System.out.println("comps diferentes");
 
             return buscarCompletoPorNomeOuMatricula(this.raiz, valor, comparador2);
         }
@@ -247,7 +247,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     private void caminharEmOrdem(NoArvore<T> no, StringBuilder sb) {
         if (no != null) {
             caminharEmOrdem(no.getFilhoEsquerda(), sb);
-            sb.append(no.getValor()).append(" -> ");
+            sb.append(no.getValor()).append("\n");
             caminharEmOrdem(no.getFilhoDireita(), sb);
         }
     }

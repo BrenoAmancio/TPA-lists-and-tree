@@ -35,7 +35,7 @@ public class Aluno  {
     }
 
     public String toString() {
-        return "[matricula = " + matricula + ", nome = " + nome + "]";
+        return "matricula = " + matricula + ", nome = " + nome;
     }
 
 

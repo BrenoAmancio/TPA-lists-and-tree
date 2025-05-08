@@ -15,7 +15,6 @@ import java.io.IOException;
 public class Application {
 
     private static final String NOME_ARQUIVO1 = "alunosOrdenados.txt";
-    private static final String NOME_ARQUIVO2 = "alunosBalanceados.txt";
 
     public static void main(String[] args) {
 

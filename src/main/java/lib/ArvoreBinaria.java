@@ -23,37 +23,37 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     @Override
     public void adicionar(T novoValor) {
 
-        NoArvore<T> noAtual, noAntigo;
-
         NoArvore<T> novoFilho = new NoArvore<>(novoValor);
-        noAtual = raiz;
-
         if (this.raiz == null) {
-            raiz = novoFilho;
+            this.raiz = novoFilho;
 
         } else {
-            while (noAtual != null) {
-                if (comparador.compare(novoValor, noAtual.getValor()) <= 0) {
-                    noAntigo = noAtual;
-                    noAtual = noAntigo.getFilhoEsquerda();
 
-                    if (noAtual == null) {
-                        noAntigo.setFilhoEsquerda(novoFilho);
+            this.raiz = adicionarRecursivo(this.raiz, novoFilho);
 
-                    }
+        }
+    }
 
-                } else {
-                    noAntigo = noAtual;
-                    noAtual = noAntigo.getFilhoDireita();
+    protected NoArvore<T> adicionarRecursivo(NoArvore<T> atual, NoArvore<T> novoFilho){
 
-                    if (noAtual == null) {
-                        noAntigo.setFilhoDireita(novoFilho);
+        if (comparador.compare(novoFilho.getValor(), atual.getValor()) < 0) {
+            if (atual.getFilhoEsquerda() == null) {
+                atual.setFilhoEsquerda(novoFilho);
+            }
+            else {
+                atual.setFilhoEsquerda(adicionarRecursivo(atual.getFilhoEsquerda(), novoFilho));
+            }
 
-                    }
-                }
+        } else {
+            if (atual.getFilhoDireita() == null) {
+                atual.setFilhoDireita(novoFilho);
+            }
+            else {
+                atual.setFilhoDireita(adicionarRecursivo(atual.getFilhoDireita(), novoFilho));
             }
         }
 
+        return atual;
     }
 
     @Override
@@ -76,9 +76,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         }
 
         return null;
-
     }
-
 
     public T pesquisar(T valor, Comparator comparador2) {
 
@@ -201,29 +199,12 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     @Override
     public int altura() {
-        return calcularAltura(raiz);
-    }
-
-    public int calcularAltura(NoArvore no){
-        if (no == null) {
-            return -1; // Altura de uma árvore vazia é -1
-        } else {
-            int alturaEsquerda = calcularAltura(no.getFilhoEsquerda());
-            int alturaDireita = calcularAltura(no.getFilhoDireita());
-            return Math.max(alturaEsquerda, alturaDireita) + 1;
-        }
+        return raiz.calcularAltura(raiz);
     }
 
     @Override
     public int quantidadeNos() {
-        return contarNos(raiz);
-    }
-
-    private int contarNos(NoArvore no) {
-        if (no == null) {
-            return 0;
-        }
-        return 1 + contarNos(no.getFilhoEsquerda()) + contarNos(no.getFilhoDireita());
+        return raiz.contarNos(raiz);
     }
 
     @Override

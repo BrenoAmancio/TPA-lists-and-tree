@@ -236,11 +236,6 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         StringBuilder sb = new StringBuilder();
         caminharEmOrdem(this.raiz, sb);
 
-        int len = sb.length();
-        if (len >= 4) {
-            sb.setLength(len - 4);
-        }
-
         return sb.toString();
     }
 

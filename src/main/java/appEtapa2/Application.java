@@ -30,8 +30,6 @@ public class Application {
 
         arvMatDegenerada = new ArvoreBinaria(compPorMatricula);
         arvNomeDegenerada = new ArvoreBinaria(compPorNome);
-        arvMatBalanceada = new ArvoreBinaria(compPorMatricula);
-        arvNomeBalanceada = new ArvoreBinaria(compPorNome);
 
         //Faz o try-catch para a leitura do txt, se funcionando adiciona as informações em aluno e depois na arvore degenerada
         try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO1))) {
@@ -57,36 +55,6 @@ public class Application {
         } catch (NumberFormatException e) {
             System.err.println("Erro ao processar um dos valores numéricos: " + e.getMessage());
         }
-
-        //Faz o try-catch para a leitura do txt, se funcionando adiciona as informações em aluno e depois na arvore degenerada
-        try (BufferedReader reader = new BufferedReader(new FileReader(NOME_ARQUIVO2))) {
-
-            int numRegistros = Integer.parseInt(reader.readLine().trim());
-            //System.out.println("Número de registros: " + numRegistros);
-
-            String linha;
-
-            while ((linha = reader.readLine()) != null) {
-                String[] partes = linha.split(";");
-                int matricula = Integer.parseInt(partes[0]);
-                String nome = partes[1];
-                float nota = Float.parseFloat(partes[2]);
-
-                arvMatBalanceada.adicionar(new Aluno(matricula, nome));
-                arvNomeBalanceada.adicionar(new Aluno(matricula, nome));
-            }
-
-
-        } catch (IOException e) {
-            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
-        } catch (NumberFormatException e) {
-            System.err.println("Erro ao processar um dos valores numéricos: " + e.getMessage());
-        }
-
-        /*System.out.println("Arvore degenerada por matricula \n " + arvMatBalanceada.caminharEmOrdem());
-        System.out.println("Arvore degenerada por nome \n " + arvNomeBalanceada.caminharEmOrdem());
-        System.out.println(arvMatBalanceada.caminharEmOrdem());
-        System.out.println(arvNomeBalanceada.caminharEmOrdem());*/
 
         while (continuar.equals(true)) {
 
@@ -115,8 +83,6 @@ public class Application {
                     System.out.println("\nDigite um dos numeros para selecionar a arvore a ter o aluno adicionado: ");
                     System.out.println("1 para arvore degenerada por matricula ");
                     System.out.println("2 para arvore degenerada por nome ");
-                    System.out.println("3 para arvore balanceada por matricula ");
-                    System.out.println("4 para arvore balanceada por nome ");
                     System.out.println("0 para voltar");
 
                     String opcaoMenuAdicionar = s.nextLine();
@@ -125,7 +91,7 @@ public class Application {
                         continuarAdic = false;
                     }
 
-                    if (opcaoMenuAdicionar.equals("1") || opcaoMenuAdicionar.equals("2") || opcaoMenuAdicionar.equals("3") || opcaoMenuAdicionar.equals("4")) {
+                    if (opcaoMenuAdicionar.equals("1") || opcaoMenuAdicionar.equals("2")) {
 
                         int matricula = 0;
                         Boolean entradaValida = false;
@@ -153,16 +119,6 @@ public class Application {
                         if (opcaoMenuAdicionar.equals("2")) {
                             arvNomeDegenerada.adicionar(new Aluno(matricula, nome));
                             System.out.println("Aluno adicionado na arvore degenerada por nome");
-                        }
-
-                        if (opcaoMenuAdicionar.equals("3")) {
-                            arvMatBalanceada.adicionar(new Aluno(matricula, nome));
-                            System.out.println("Aluno adicionado na arvore balanceada por matricula");
-                        }
-
-                        if (opcaoMenuAdicionar.equals("4")) {
-                            arvNomeBalanceada.adicionar(new Aluno(matricula, nome));
-                            System.out.println("Aluno adicionado na arvore balanceada por nome");
                         }
                     }
                 }
@@ -194,8 +150,6 @@ public class Application {
                             System.out.println("\nDigite um dos numeros para selecionar a arvore a ser pesquisa ");
                             System.out.println("1 para arvore degenerada por matricula ");
                             System.out.println("2 para arvore degenerada por nome ");
-                            System.out.println("3 para arvore balanceada por matricula ");
-                            System.out.println("4 para arvore balanceada por nome ");
                             System.out.println("0 para voltar");
 
                             String opcaoMenuPesquisarArvore = s.nextLine();
@@ -205,7 +159,7 @@ public class Application {
                                 continuarPesqArv = false;
                             }
 
-                            if (opcaoMenuPesquisarArvore.equals("1") || opcaoMenuPesquisarArvore.equals("3")) {
+                            if (opcaoMenuPesquisarArvore.equals("1")) {
 
                                 int matricula = 0;
                                 Boolean entradaValida = false;
@@ -222,16 +176,7 @@ public class Application {
                                     }
                                 }
 
-
-                                if (opcaoMenuPesquisarArvore.equals("1")) {
-                                    resultado = arvMatDegenerada.pesquisar(new Aluno(matricula, ""));
-
-                                }
-
-                                if (opcaoMenuPesquisarArvore.equals("3")) {
-                                    resultado = arvMatBalanceada.pesquisar(new Aluno(matricula, ""));
-
-                                }
+                                resultado = arvMatDegenerada.pesquisar(new Aluno(matricula, ""));
 
                                 if (resultado == null) {
                                     System.out.println("Aluno não encontrado");
@@ -241,20 +186,12 @@ public class Application {
 
                                 }
 
-                            } else if (opcaoMenuPesquisarArvore.equals("2") || opcaoMenuPesquisarArvore.equals("4")) {
+                            } else if (opcaoMenuPesquisarArvore.equals("2")) {
 
-                                System.out.println("\nDigite o nome do aluno a ser adicionado: ");
+                                System.out.println("\nDigite o nome do aluno a ser pesquisado: ");
                                 String nome = s.nextLine();
 
-                                if (opcaoMenuPesquisarArvore.equals("2")) {
-                                    resultado = arvNomeDegenerada.pesquisar(new Aluno(0, nome));
-
-                                }
-
-                                if (opcaoMenuPesquisarArvore.equals("4")) {
-                                    resultado = arvNomeBalanceada.pesquisar(new Aluno(0, nome));
-
-                                }
+                                resultado = arvNomeDegenerada.pesquisar(new Aluno(0, nome));
 
                                 if (resultado == null) {
                                     System.out.println("Aluno não encontrado");
@@ -293,9 +230,7 @@ public class Application {
                                     System.out.println("\nDigite um dos numeros para selecionar a arvore a ser pesquisa ");
                                     System.out.println("1 para arvore degenerada por matricula ");
                                     System.out.println("2 para arvore degenerada por nome ");
-                                    System.out.println("3 para arvore balanceada por matricula ");
-                                    System.out.println("4 para arvore balanceada por nome ");
-                                    System.out.println("0 para voltar XD");
+                                    System.out.println("0 para voltar");
 
                                     String opcaoMenuPesquisarArvore = s.nextLine();
                                     Aluno resultado = null;
@@ -304,7 +239,7 @@ public class Application {
                                         continuarPesqCompMat = false;
                                     }
 
-                                    if (opcaoMenuPesquisarArvore.equals("1") || opcaoMenuPesquisarArvore.equals("2") || opcaoMenuPesquisarArvore.equals("3") || opcaoMenuPesquisarArvore.equals("4")) {
+                                    if (opcaoMenuPesquisarArvore.equals("1") || opcaoMenuPesquisarArvore.equals("2")) {
 
                                         int matricula = 0;
                                         Boolean entradaValida = false;
@@ -328,16 +263,6 @@ public class Application {
 
                                         if (opcaoMenuPesquisarArvore.equals("2")) {
                                             resultado = arvNomeDegenerada.pesquisar(new Aluno(matricula, ""), compPorMatricula);
-
-                                        }
-
-                                        if (opcaoMenuPesquisarArvore.equals("3")) {
-                                            resultado = arvMatBalanceada.pesquisar(new Aluno(matricula, ""), compPorMatricula);
-
-                                        }
-
-                                        if (opcaoMenuPesquisarArvore.equals("4")) {
-                                            resultado = arvNomeBalanceada.pesquisar(new Aluno(matricula, ""), compPorMatricula);
 
                                         }
 
@@ -361,9 +286,7 @@ public class Application {
                                     System.out.println("\nDigite um dos numeros para selecionar a arvore a ser pesquisa ");
                                     System.out.println("1 para arvore degenerada por matricula ");
                                     System.out.println("2 para arvore degenerada por nome ");
-                                    System.out.println("3 para arvore balanceada por matricula ");
-                                    System.out.println("4 para arvore balanceada por nome ");
-                                    System.out.println("0 para voltar ");
+                                    System.out.println("0 para voltar XD ");
 
                                     String opcaoMenuPesquisarArvore = s.nextLine();
                                     Aluno resultado = null;
@@ -372,7 +295,7 @@ public class Application {
                                         continuarPesqCompNome = false;
                                     }
 
-                                    if (opcaoMenuPesquisarArvore.equals("1") || opcaoMenuPesquisarArvore.equals("2") || opcaoMenuPesquisarArvore.equals("3") || opcaoMenuPesquisarArvore.equals("4")) {
+                                    if (opcaoMenuPesquisarArvore.equals("1") || opcaoMenuPesquisarArvore.equals("2")) {
 
                                         System.out.println("\nDigite o nome do aluno a ser pesquisado: ");
                                         String nome = s.nextLine();
@@ -384,84 +307,6 @@ public class Application {
 
                                         if (opcaoMenuPesquisarArvore.equals("2")) {
                                             resultado = arvNomeDegenerada.pesquisar(new Aluno(0, nome), compPorNome);
-
-                                        }
-
-                                        if (opcaoMenuPesquisarArvore.equals("3")) {
-                                            resultado = arvMatBalanceada.pesquisar(new Aluno(0, nome), compPorNome);
-
-                                        }
-
-                                        if (opcaoMenuPesquisarArvore.equals("4")) {
-                                            resultado = arvNomeBalanceada.pesquisar(new Aluno(0, nome), compPorNome);
-
-                                        }
-
-                                        if (resultado == null) {
-                                            System.out.println("Aluno não encontrado");
-
-                                        } else {
-                                            System.out.println("Aluno encontrado: " + resultado);
-
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (opcaoMenuPesquisarComp.equals("2")) {
-
-                                Boolean continuarPesqComp = true;
-
-                                while (continuarPesqComp.equals(true)) {
-
-                                    System.out.println("\nDigite um dos numeros para selecionar a arvore a ser pesquisa ");
-                                    System.out.println("1 para arvore degenerada por matricula ");
-                                    System.out.println("2 para arvore degenerada por nome ");
-                                    System.out.println("3 para arvore balanceada por matricula ");
-                                    System.out.println("4 para arvore balanceada por nome ");
-                                    System.out.println("0 para voltar ");
-
-                                    String opcaoMenuPesquisarArvore = s.nextLine();
-                                    Aluno resultado = null;
-
-                                    if (opcaoMenuPesquisarArvore.equals("0")) {
-                                        continuarPesqComp = false;
-                                    }
-
-                                    if (opcaoMenuPesquisarArvore.equals("1") || opcaoMenuPesquisarArvore.equals("2") || opcaoMenuPesquisarArvore.equals("3") || opcaoMenuPesquisarArvore.equals("4")) {
-
-                                        int matricula = 0;
-                                        Boolean entradaValida = false;
-
-                                        while (!entradaValida) {
-                                            try {
-                                                System.out.println("\nDigite a matrícula do aluno a ser pesquisado: ");
-                                                matricula = s.nextInt();
-                                                s.nextLine();
-                                                entradaValida = true;
-                                            } catch (InputMismatchException e) {
-                                                System.err.println("Precisa ser um número inteiro. Tente novamente.");
-                                                s.nextLine();
-                                            }
-                                        }
-
-                                        if (opcaoMenuPesquisarArvore.equals("1")) {
-                                            resultado = arvMatDegenerada.pesquisar(new Aluno(matricula, ""), compPorMatricula);
-
-                                        }
-
-                                        if (opcaoMenuPesquisarArvore.equals("2")) {
-                                            resultado = arvNomeDegenerada.pesquisar(new Aluno(matricula, ""), compPorMatricula);
-
-                                        }
-
-                                        if (opcaoMenuPesquisarArvore.equals("3")) {
-                                            resultado = arvMatBalanceada.pesquisar(new Aluno(matricula, ""), compPorMatricula);
-
-                                        }
-
-                                        if (opcaoMenuPesquisarArvore.equals("4")) {
-                                            resultado = arvNomeBalanceada.pesquisar(new Aluno(matricula, ""), compPorMatricula);
 
                                         }
 
@@ -489,8 +334,6 @@ public class Application {
                     System.out.println("\nDigite um dos numeros para selecionar a arvore a ter um aluno removido ");
                     System.out.println("1 para arvore degenerada por matricula ");
                     System.out.println("2 para arvore degenerada por nome ");
-                    System.out.println("3 para arvore balanceada por matricula ");
-                    System.out.println("4 para arvore balanceada por nome ");
                     System.out.println("0 para voltar ");
 
                     String opcaoMenuRemover = s.nextLine();
@@ -500,7 +343,7 @@ public class Application {
                         continuarRem = false;
                     }
 
-                    if (opcaoMenuRemover.equals("1") || opcaoMenuRemover.equals("3")) {
+                    if (opcaoMenuRemover.equals("1")) {
 
                         int matricula = 0;
                         Boolean entradaValida = false;
@@ -517,28 +360,16 @@ public class Application {
                             }
                         }
 
-                        if (opcaoMenuRemover.equals("1")) {
-                            resultado = arvMatDegenerada.remover(new Aluno(matricula, ""));
+                        arvMatDegenerada.remover(new Aluno(matricula, ""));
 
-                        }
-
-                        if (opcaoMenuRemover.equals("3")) {
-                            resultado = arvMatBalanceada.remover(new Aluno(matricula, ""));
-
-                        }
                     }
 
-                    if (opcaoMenuRemover.equals("2") || opcaoMenuRemover.equals("4")) {
+                    if (opcaoMenuRemover.equals("2")) {
                         System.out.println("\nDigite o nome do aluno a ser removido: ");
                         String nome = s.nextLine();
 
                         if (opcaoMenuRemover.equals("2")) {
-                            resultado = arvNomeDegenerada.remover(new Aluno(0, nome));
-
-                        }
-
-                        if (opcaoMenuRemover.equals("4")) {
-                            resultado = arvNomeBalanceada.remover(new Aluno(0, nome));
+                            arvNomeDegenerada.remover(new Aluno(0, nome));
 
                         }
                     }
@@ -554,8 +385,6 @@ public class Application {
                     System.out.println("\nDigite um dos numeros para selecionar a arvore ter seu caminho em order mostrada ");
                     System.out.println("1 para arvore degenerada por matricula ");
                     System.out.println("2 para arvore degenerada por nome ");
-                    System.out.println("3 para arvore balanceada por matricula ");
-                    System.out.println("4 para arvore balanceada por nome ");
                     System.out.println("0 para voltar ");
 
                     String opcaoMenuCaminhoOrdem = s.nextLine();
@@ -565,7 +394,7 @@ public class Application {
                         continuarCaminhoOrdem = false;
                     }
 
-                    if (opcaoMenuCaminhoOrdem.equals("1") || opcaoMenuCaminhoOrdem.equals("2") || opcaoMenuCaminhoOrdem.equals("3") || opcaoMenuCaminhoOrdem.equals("4")) {
+                    if (opcaoMenuCaminhoOrdem.equals("1") || opcaoMenuCaminhoOrdem.equals("2")) {
 
                         if (opcaoMenuCaminhoOrdem.equals("1")) {
                             resultado = arvMatDegenerada.caminharEmOrdem();
@@ -574,16 +403,6 @@ public class Application {
 
                         if (opcaoMenuCaminhoOrdem.equals("2")) {
                             resultado = arvNomeDegenerada.caminharEmOrdem();
-
-                        }
-
-                        if (opcaoMenuCaminhoOrdem.equals("3")) {
-                            resultado = arvMatBalanceada.caminharEmOrdem();
-
-                        }
-
-                        if (opcaoMenuCaminhoOrdem.equals("4")) {
-                            resultado = arvNomeBalanceada.caminharEmOrdem();
 
                         }
 
@@ -596,4 +415,3 @@ public class Application {
         s.close();
     }
 }
-

@@ -64,25 +64,4 @@ public class NoArvore<T> {
         this.filhoEsquerda = filhoEsquerda;
     }
 
-    public int calcularAltura(NoArvore<T> no){
-        if (no == null) {
-            return -1; // Altura de uma árvore vazia é -1
-        } else {
-            int alturaEsquerda = calcularAltura(no.getFilhoEsquerda());
-            int alturaDireita = calcularAltura(no.getFilhoDireita());
-            return Math.max(alturaEsquerda, alturaDireita) + 1;
-        }
-    }
-
-    public int contarNos(NoArvore<T> no) {
-        if (no == null) {
-            return 0;
-        }
-        return 1 + contarNos(no.getFilhoEsquerda()) + contarNos(no.getFilhoDireita());
-    }
-
-    public int fatorBalanceamento() {
-        return calcularAltura(this.filhoDireita) - calcularAltura(this.filhoEsquerda);
-    }
-
 }

@@ -10,11 +10,11 @@ public class ArvoreAVL <T extends Comparable> extends ArvoreBinaria<T>{
     }
 
     @Override
-    protected NoArvore<T> adicionarRecursivo(NoArvore<T> atual, NoArvore<T> novoFilho) {
-        raiz = super.adicionarRecursivo(atual, novoFilho);
+    protected NoArvore<T> adicionarRecursivo(NoArvore<T> raiz, NoArvore<T> novoFilho) {
+        raiz = super.adicionarRecursivo(raiz, novoFilho);
 
-        if (raiz.fatorBalanceamento() > 1) {
-            if(raiz.getFilhoDireita().fatorBalanceamento()>0){
+        if (fatorBalanceamento(raiz) > 1) {
+            if(fatorBalanceamento(raiz.getFilhoDireita())>0){
                 raiz = this.rotacaoEsquerda(raiz);
 
             }
@@ -22,8 +22,8 @@ public class ArvoreAVL <T extends Comparable> extends ArvoreBinaria<T>{
                 raiz = this.rotacaoDireitaEsquerda(raiz);
 
             }
-        } else if (raiz.fatorBalanceamento() < -1) {
-            if (raiz.getFilhoDireita().fatorBalanceamento() < 0){
+        } else if (fatorBalanceamento(raiz) < -1) {
+            if (fatorBalanceamento(raiz.getFilhoEsquerda()) < 0){
                 raiz = this.rotacaoDireita(raiz);
 
             } else {
@@ -60,5 +60,12 @@ public class ArvoreAVL <T extends Comparable> extends ArvoreBinaria<T>{
         r.setFilhoDireita(rotacaoDireita(r.getFilhoDireita()));
 
         return rotacaoEsquerda(r);
+    }
+
+    private int fatorBalanceamento(NoArvore<T> raiz) {
+        int alturaDireita = calcularAltura(raiz.getFilhoDireita());
+        int alturaEsquerda = calcularAltura(raiz.getFilhoEsquerda());
+
+        return alturaDireita - alturaEsquerda;
     }
 }
